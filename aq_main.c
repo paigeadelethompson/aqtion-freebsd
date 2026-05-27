@@ -196,8 +196,8 @@ static driver_t aq_driver = {
 	"aq", aq_methods, sizeof(struct aq_dev),
 };
 
-static devclass_t aq_devclass;
-DRIVER_MODULE(atlantic, pci, aq_driver, aq_devclass, 0, 0);
+//static devclass_t aq_devclass;
+DRIVER_MODULE(atlantic, pci, aq_driver, NULL, NULL);
 
 MODULE_DEPEND(atlantic, pci, 1, 1, 1);
 MODULE_DEPEND(atlantic, ether, 1, 1, 1);
@@ -786,9 +786,10 @@ static void aq_if_multi_set(if_ctx_t ctx)
 #endif
 	if (softc->mcnt >= AQ_HW_MAC_MAX)
 	{
-		aq_hw_set_promisc(hw, !!(ifp->if_flags & IFF_PROMISC),
-				  aq_is_vlan_promisc_required(softc),
-				  !!(ifp->if_flags & IFF_ALLMULTI) || aq_is_mc_promisc_required(softc));
+            aq_hw_set_promisc(hw, 
+                  !!(if_getflags(ifp) & IFF_PROMISC),
+                  aq_is_vlan_promisc_required(softc),
+                  !!(if_getflags(ifp) & IFF_ALLMULTI) || aq_is_mc_promisc_required(softc));
 	}else{
 #if __FreeBSD_version >= 1300054
 		if_foreach_llmaddr(iflib_get_ifp(ctx), &aq_mc_filter_apply, softc);
@@ -830,7 +831,7 @@ static int aq_if_media_change(if_ctx_t ctx)
 	AQ_DBG_ENTER();
 
 	/* Not allowd in UP state, since causes unsync of rings */
-	if ((ifp->if_flags & IFF_UP)){
+	if ((if_getflags(ifp) & IFF_UP)){
 		rc = EPERM;
 		goto exit;
 	}

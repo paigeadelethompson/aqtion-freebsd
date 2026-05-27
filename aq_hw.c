@@ -32,7 +32,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <unistd.h>
+//#include <unistd.h>
 #include <sys/endian.h>
 #include <sys/param.h>
 #include <sys/systm.h>

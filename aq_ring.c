@@ -370,7 +370,7 @@ static int aq_isc_rxd_pkt_get(void *arg, if_rxd_info_t ri)
 		cidx = aq_next(cidx, ring->rx_size - 1);
 	} while (!rx_desc->wb.eop);
 
-	if ((ifp->if_capenable & IFCAP_RXCSUM) != 0) {
+        if ((if_getcapenable(ifp) & IFCAP_RXCSUM) != 0) {
 		aq_rx_set_cso_flags(rx_desc, ri);
 	}
 	ri->iri_rsstype = bsd_rss_type[rx_desc->wb.rss_type & 0xF];
