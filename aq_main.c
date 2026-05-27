@@ -160,7 +160,7 @@ static int aq_if_media_change(if_ctx_t ctx);
 static int aq_if_promisc_set(if_ctx_t ctx, int flags);
 static uint64_t aq_if_get_counter(if_ctx_t ctx, ift_counter cnt);
 static void aq_if_timer(if_ctx_t ctx, uint16_t qid);
-static int aq_if_priv_ioctl(if_ctx_t ctx, u_long command, caddr_t data);
+// static int aq_if_priv_ioctl(if_ctx_t ctx, u_long command, caddr_t data);
 static int aq_hw_capabilities(struct aq_dev *softc);
 static void aq_add_stats_sysctls(struct aq_dev *softc);
 
@@ -177,7 +177,7 @@ static void aq_if_vlan_register(if_ctx_t ctx, uint16_t vtag);
 static void aq_if_vlan_unregister(if_ctx_t ctx, uint16_t vtag);
 
 /* Informational/diagnostic */
-static void	aq_if_debug(if_ctx_t ctx);
+// static void	aq_if_debug(if_ctx_t ctx);
 static void	aq_if_led_func(if_ctx_t ctx, int onoff);
 
 static device_method_t aq_methods[] = {
